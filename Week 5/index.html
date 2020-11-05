@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Week 5 workshop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="canvas">
+        <div id="score">Score: 0</div>
+        <div id="timeleft">Time-left: 15</div>
+        <img id="mole" src="mole.png"></img>
+        <img id="hedgehog" src="hedgehog.png"></img>  
+    </div> 
+    <div id="Gover">
+        <h1>Game over</h1>
+        <p id="finalscore"></p>
+    </div>
+    <script>
+        const mole = document.getElementById("mole");
+        const hedge = document.getElementById("hedgehog");
+        const timeleft = document.getElementById("timeleft");
+        var score = 0;
+        var time = 15;
+
+        
+        
+        showAnimal = () => {
+            setTimeout(hideAnimal, 500);
+            let randomNumber = Math.random();
+           
+           if(randomNumber > 0.5) {
+                mole.style.display = "block";
+                hedge.style.display = "none"; 
+            } else {
+                hedge.style.display = "block";
+                mole.style.display = "none";
+            }
+            if (time == 0){
+                clearInterval(animaldisplay);
+            }
+     
+        }
+
+
+        hideAnimal = () => {
+                hedge.style.display = "none";
+                mole.style.display = "none";
+        }
+
+
+        addScore = () => {
+            score++;
+            document.getElementById("score").textContent = "Score: " + score;
+        }
+        minusScore = () => {
+            score--;
+            document.getElementById("score").textContent = "Score: " + score;
+        }
+
+
+        countdown = () =>{
+            time--;
+            console.log(time);
+            timeleft.textContent = "Time-left: " + time;
+            if (time === -1) {
+                document.getElementById("finalscore").textContent = "Your score is " + score;
+                document.getElementById("Gover").style.display = "block";
+                clearInterval(countdowntimer);
+
+            }
+        }
+
+        hedge.addEventListener("click", minusScore);
+        mole.addEventListener("click", addScore);
+        let animaldisplay = setInterval(showAnimal, 1000);
+        let countdowntimer = setInterval(countdown, 1000);
+
+    </script> 
+</body>
+</html> 
